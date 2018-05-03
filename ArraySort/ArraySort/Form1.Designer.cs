@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listBoxNames = new System.Windows.Forms.ListBox();
             this.labelOutputTimer = new System.Windows.Forms.Label();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonOutput = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonSort = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // listBoxNames
@@ -51,7 +53,6 @@
             this.labelOutputTimer.Name = "labelOutputTimer";
             this.labelOutputTimer.Size = new System.Drawing.Size(132, 100);
             this.labelOutputTimer.TabIndex = 1;
-            this.labelOutputTimer.Text = "label1";
             this.labelOutputTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxSearch
@@ -91,6 +92,11 @@
             this.buttonSort.UseVisualStyleBackColor = true;
             this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,6 +124,7 @@
         private System.Windows.Forms.Button buttonOutput;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Button buttonSort;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

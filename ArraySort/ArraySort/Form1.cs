@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
+
 namespace ArraySort
 {
     public partial class Form1 : Form
@@ -16,6 +17,7 @@ namespace ArraySort
         //creating the array at class level allows for it to be referenced from all parts of the program
         string[] NameSortArray = new string[5000];
         int i = 0;
+        //actually reads the specified file
         StreamReader SR = File.OpenText("Names.Csv");
 
         public Form1()
@@ -24,7 +26,7 @@ namespace ArraySort
         }
         private void Swap (ref string a, ref string b)
         {
-
+            //this method is referenced in order to swap the names in the array properly
             string temp = a;
             a = b;
             b = temp;
@@ -33,23 +35,30 @@ namespace ArraySort
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //sets the search button as unusable until you sort the names. 
+            buttonSearch.Visible = false;
+
             try
             {
                 for (i = 0; i < 5000; i++)
                 {
+                    //reads every name within the array and inserts them into the listbox
                     NameSortArray[i] = SR.ReadLine();
                     listBoxNames.Items.Add(NameSortArray[i]);
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("E R R O R");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //grabs the current time
+            DateTime Time1 = DateTime.Now;
+            
             try
             {
                 
@@ -60,13 +69,22 @@ namespace ArraySort
                 foreach (string name in listBoxNames.Items)
                 {
                     OutputFile.WriteLine(name.ToString());
+
                 
                 }
+                //subtracts the time from the beginning of the action to get an accurate timestamp
+                Double Time2 = (DateTime.Now - Time1).TotalSeconds;
+                labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
                 MessageBox.Show("Output Complete!");
+                
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Output Not Completed");   
+                //subtracts the time from the beginning of the action to get an accurate timestamp
+                Double Time2 = (DateTime.Now - Time1).TotalSeconds;
+                labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
+                MessageBox.Show(ex.Message);
+
             }
         }
 
@@ -76,7 +94,9 @@ namespace ArraySort
 
         private void SelectionSort(string[] NameSortArray)
         {
-            int minIndex; //Subscript of smallest value in scanned area
+            //this is taken directly out of the book, but tweaked to handle strings instead of ints
+
+            int minIndex; //index of smallest value in scanned area
             string minValue; //smallest value in the scanned area
 
             //The outter loop steps through all the array elements, Except the last one
@@ -108,52 +128,52 @@ namespace ArraySort
 
         private void buttonSort_Click(object sender, EventArgs e)
         {
-            
-                int counter = 0;
-                DateTime Time1 = DateTime.Now;
-                try
+            //once the names have been sorted, the search button becomes available.
+            buttonSearch.Visible = true;
+            //grabs the current time
+            DateTime Time1 = DateTime.Now;
+            try
                 {
-                    // Array variables
-                    const int SIZE = 5000;
-                    string[] NameSortArray = new string[SIZE];
-                    StreamReader inputFile = File.OpenText("Names.csv");
 
-
-                    // Input names into Names Array while counter is less than the number of items
-                    while (counter < NameSortArray.Length && !inputFile.EndOfStream)
-                    {
-                        NameSortArray[counter] = inputFile.ReadLine();
-                        counter++;
-                    }
-
-                    // Sort Array alphabetically 
+                    // Sorts the array alphabetically 
                     SelectionSort(NameSortArray);
-
+                    //clears list box
                     listBoxNames.Items.Clear();
 
                     for (i = 0; i < 5000; i++)
                     {
-                       
+                       //adds all the names back into the listbox in the sorted order
                         listBoxNames.Items.Add(NameSortArray[i]);
                     }
+               
 
-                    Double Time2 = (DateTime.Now - Time1).TotalSeconds;
-                    labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
+                //subtracts the time from the beginning of the action to get an accurate timestamp
+                Double Time2 = (DateTime.Now - Time1).TotalSeconds;
+                //outputs time taken
+                labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
 
 
 
-                     
 
-                }
+
+            }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
-                }
+                //subtracts the time from the beginning of the action to get an accurate timestamp
+                Double Time2 = (DateTime.Now - Time1).TotalSeconds;
+                //outputs time taken
+                labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
+                //error handling
+                MessageBox.Show(ex.Message);
+                
+            }
 
         }
 
         private int BinarySearch(string[] NameSortArray, string value)
         {
+            //binary search honestly confuses me and is giving me a lot of trouble..
+
             int first = 0;
             int last = NameSortArray.Length - 1;
             int middle;
@@ -175,36 +195,55 @@ namespace ArraySort
                 else
                 {
                     first = middle + 1;
+
                 }
 
             }
-           
+
             return position;
 
         }
 
         private void buttonSearch_Click_1(object sender, EventArgs e)
         {
+            //grabs the current time
+            DateTime Time1 = DateTime.Now;
             try
             {
-               string SearchBox = textBoxSearch.Text;
+                //puts the input text into a variable
+                string SearchBox = textBoxSearch.Text;
+                //uses binarysearch to search the array for the input text
                 int Position = BinarySearch(NameSortArray, textBoxSearch.Text);
-bool SearchFound = NameSortArray.Contains(SearchBox);
-                
+                //if the input text is found, it sets the boolean to true
+                bool SearchFound = NameSortArray.Contains(SearchBox);
 
+                //if the input text is not found, it notifies the user.
                 if (SearchFound == false)
                 {
+                    //subtracts the time from the beginning of the action to get an accurate timestamp
+                    Double Time2 = (DateTime.Now - Time1).TotalSeconds;
+                    labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
                     MessageBox.Show("The name you searched could not be found.");
+
                 }
                 else
                 {
-                    MessageBox.Show(Position.ToString());
+                    //subtracts the time from the beginning of the action to get an accurate timestamp
+                    Double Time2 = (DateTime.Now - Time1).TotalSeconds;
+                    labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
+                    MessageBox.Show("The name " + "'" + textBoxSearch.Text.ToString() + "'" + " has been found!");
+                     
+                     
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("eeee");
+                //subtracts the time from the beginning of the action to get an accurate timestamp
+                Double Time2 = (DateTime.Now - Time1).TotalSeconds;
+                labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
+                MessageBox.Show(ex.Message);
             }
+
         }
     }
 }
