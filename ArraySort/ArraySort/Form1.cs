@@ -17,6 +17,9 @@ namespace ArraySort
         //creating the array at class level allows for it to be referenced from all parts of the program
         string[] NameSortArray = new string[5000];
         int i = 0;
+        bool Exact = false;
+        bool Partial = false;
+        bool StartsWith = false;
         //actually reads the specified file
         StreamReader SR = File.OpenText("Names.Csv");
 
@@ -35,9 +38,12 @@ namespace ArraySort
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //sets the search box and button as unusable until you sort the names. 
+            //sets the search box, radio buttons and button as unusable until you sort the names. 
             buttonSearch.Visible = false;
             textBoxSearch.Visible = false;
+            radioButtonExact.Visible = false;
+            radioButtonPartial.Visible = false;
+            radioButtonStartsWith.Visible = false;
 
             try
             {
@@ -146,9 +152,13 @@ namespace ArraySort
                 //outputs time taken
                 labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
 
-                //once the names have been sorted, the search box and button become available.
+                //once the names have been sorted, the search box, radio buttons, and button become available.
                 buttonSearch.Visible = true;
                 textBoxSearch.Visible = true;
+                radioButtonExact.Visible = true;
+                radioButtonExact.Select();
+                radioButtonPartial.Visible = true;
+                radioButtonStartsWith.Visible = true;
 
 
 
@@ -166,7 +176,7 @@ namespace ArraySort
 
         }
 
-        private int BinarySearch(string[] NameSortArray, string value)
+        private int BinarySearch(string[] NameSortArray, string value, bool Exact, bool StartsWith, bool Partial)
         {
             //binary search honestly confuses me and is giving me a lot of trouble..
             //it's supposed to output the position of the selected Name.
@@ -176,25 +186,57 @@ namespace ArraySort
             int middle;
             int position = -1;
             bool found = false;
-
-            while (!found && first <= last)
+            
+            if (Exact == true)
             {
-                middle = (first + last) / 2;
-                if (NameSortArray[middle] == value)
+                while (!found && first <= last)
                 {
-                    found = true;
-                    position = middle;
-                }
-                else if (string.Compare(NameSortArray[middle], value, false) > 0)
-                {
-                    last = middle - 1;
-                }
-                else
-                {
-                    first = middle + 1;
+                    middle = (first + last) / 2;
+                    if (NameSortArray[middle] == value)
+                    {
+                        found = true;
+                        position = middle;
+                    }
+                    else if (string.Compare(NameSortArray[middle], value, false) > 0)
+                    {
+                        last = middle - 1;
+                    }
+                    else
+                    {
+                        first = middle + 1;
+
+                    }
 
                 }
 
+
+            }
+            //currently doesnt work
+            if (Partial == true)
+            {
+                int i = 0;
+                
+                if (!(NameSortArray[i].Contains(value)))
+                {
+                    i++;
+                }
+                if (NameSortArray[i].Contains(value))
+                {
+                    position = i;
+                }
+            }
+            if (StartsWith == true)
+            {
+                int i = 0;
+
+                if (!(NameSortArray[i].StartsWith(value)))
+                {
+                    i++;
+                }
+                if (NameSortArray[i].StartsWith(value))
+                {
+                    position = i;
+                }
             }
 
             return position;
@@ -207,13 +249,14 @@ namespace ArraySort
             DateTime Time1 = DateTime.Now;
             try
             {
+
                 //puts the input text into a variable
                 string SearchBox = textBoxSearch.Text;
                 //uses binarysearch to search the array for the input text
-                int Position = BinarySearch(NameSortArray, textBoxSearch.Text);
+                int Position = BinarySearch(NameSortArray, textBoxSearch.Text, Exact, StartsWith, Partial);
                 //if the input text is found, it sets the boolean to true
                 bool SearchFound = NameSortArray.Contains(SearchBox);
-
+                
                 //if the input text is not found, it notifies the user.
                 if (SearchFound == false)
                 {
@@ -225,13 +268,14 @@ namespace ArraySort
                 }
                 else
                 {
+
                     //subtracts the time from the beginning of the action to get an accurate timestamp
                     Double Time2 = (DateTime.Now - Time1).TotalSeconds;
                     labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
                     MessageBox.Show("The name " + "'" + textBoxSearch.Text.ToString() + "'" + " has been found!");
+                    //finds and highlights the correct listbox item corresponding to the name. 
                     listBoxNames.SetSelected(Position, true);
-                     
-                     
+
                 }
             }
             catch (Exception ex)
@@ -242,6 +286,30 @@ namespace ArraySort
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void radioButtonExact_CheckedChanged(object sender, EventArgs e)
+        {
+            //sets the corresponding boolean to true
+            Exact = true;
+            Partial = false;
+            StartsWith = false;
+        }
+
+        private void radioButtonPartial_CheckedChanged(object sender, EventArgs e)
+        {
+            //sets the corresponding boolean to true
+            Partial = true;
+            Exact = false;
+            StartsWith = false;
+        }
+
+        private void radioButtonStartsWith_CheckedChanged(object sender, EventArgs e)
+        {
+            //sets the corresponding boolean to true
+            StartsWith = true;
+            Exact = false;
+            Partial = false;
         }
     }
 }

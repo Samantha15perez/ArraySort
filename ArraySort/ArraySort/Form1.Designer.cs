@@ -34,36 +34,39 @@
             this.buttonOutput = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonSort = new System.Windows.Forms.Button();
+            this.radioButtonExact = new System.Windows.Forms.RadioButton();
+            this.radioButtonPartial = new System.Windows.Forms.RadioButton();
+            this.radioButtonStartsWith = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // listBoxNames
             // 
             this.listBoxNames.FormattingEnabled = true;
-            this.listBoxNames.Location = new System.Drawing.Point(16, 11);
+            this.listBoxNames.Location = new System.Drawing.Point(12, 12);
             this.listBoxNames.Name = "listBoxNames";
-            this.listBoxNames.Size = new System.Drawing.Size(170, 225);
+            this.listBoxNames.Size = new System.Drawing.Size(150, 225);
             this.listBoxNames.TabIndex = 0;
             // 
             // labelOutputTimer
             // 
             this.labelOutputTimer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelOutputTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelOutputTimer.Location = new System.Drawing.Point(213, 136);
+            this.labelOutputTimer.Location = new System.Drawing.Point(189, 152);
             this.labelOutputTimer.Name = "labelOutputTimer";
-            this.labelOutputTimer.Size = new System.Drawing.Size(108, 100);
+            this.labelOutputTimer.Size = new System.Drawing.Size(108, 85);
             this.labelOutputTimer.TabIndex = 1;
             this.labelOutputTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(199, 41);
+            this.textBoxSearch.Location = new System.Drawing.Point(175, 42);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(137, 20);
             this.textBoxSearch.TabIndex = 3;
             // 
             // buttonOutput
             // 
-            this.buttonOutput.Location = new System.Drawing.Point(274, 12);
+            this.buttonOutput.Location = new System.Drawing.Point(250, 13);
             this.buttonOutput.Name = "buttonOutput";
             this.buttonOutput.Size = new System.Drawing.Size(62, 23);
             this.buttonOutput.TabIndex = 4;
@@ -73,7 +76,7 @@
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(236, 67);
+            this.buttonSearch.Location = new System.Drawing.Point(212, 68);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(62, 23);
             this.buttonSearch.TabIndex = 5;
@@ -83,7 +86,7 @@
             // 
             // buttonSort
             // 
-            this.buttonSort.Location = new System.Drawing.Point(199, 12);
+            this.buttonSort.Location = new System.Drawing.Point(175, 13);
             this.buttonSort.Name = "buttonSort";
             this.buttonSort.Size = new System.Drawing.Size(62, 23);
             this.buttonSort.TabIndex = 6;
@@ -91,11 +94,50 @@
             this.buttonSort.UseVisualStyleBackColor = true;
             this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
+            // radioButtonExact
+            // 
+            this.radioButtonExact.AutoSize = true;
+            this.radioButtonExact.Location = new System.Drawing.Point(212, 97);
+            this.radioButtonExact.Name = "radioButtonExact";
+            this.radioButtonExact.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonExact.TabIndex = 7;
+            this.radioButtonExact.TabStop = true;
+            this.radioButtonExact.Text = "Exact";
+            this.radioButtonExact.UseVisualStyleBackColor = true;
+            this.radioButtonExact.CheckedChanged += new System.EventHandler(this.radioButtonExact_CheckedChanged);
+            // 
+            // radioButtonPartial
+            // 
+            this.radioButtonPartial.AutoSize = true;
+            this.radioButtonPartial.Location = new System.Drawing.Point(212, 111);
+            this.radioButtonPartial.Name = "radioButtonPartial";
+            this.radioButtonPartial.Size = new System.Drawing.Size(54, 17);
+            this.radioButtonPartial.TabIndex = 7;
+            this.radioButtonPartial.TabStop = true;
+            this.radioButtonPartial.Text = "Partial";
+            this.radioButtonPartial.UseVisualStyleBackColor = true;
+            this.radioButtonPartial.CheckedChanged += new System.EventHandler(this.radioButtonPartial_CheckedChanged);
+            // 
+            // radioButtonStartsWith
+            // 
+            this.radioButtonStartsWith.AutoSize = true;
+            this.radioButtonStartsWith.Location = new System.Drawing.Point(212, 125);
+            this.radioButtonStartsWith.Name = "radioButtonStartsWith";
+            this.radioButtonStartsWith.Size = new System.Drawing.Size(72, 17);
+            this.radioButtonStartsWith.TabIndex = 7;
+            this.radioButtonStartsWith.TabStop = true;
+            this.radioButtonStartsWith.Text = "Beginning";
+            this.radioButtonStartsWith.UseVisualStyleBackColor = true;
+            this.radioButtonStartsWith.CheckedChanged += new System.EventHandler(this.radioButtonStartsWith_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 252);
+            this.ClientSize = new System.Drawing.Size(324, 252);
+            this.Controls.Add(this.radioButtonStartsWith);
+            this.Controls.Add(this.radioButtonPartial);
+            this.Controls.Add(this.radioButtonExact);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.buttonOutput);
@@ -118,6 +160,9 @@
         private System.Windows.Forms.Button buttonOutput;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Button buttonSort;
+        private System.Windows.Forms.RadioButton radioButtonExact;
+        private System.Windows.Forms.RadioButton radioButtonPartial;
+        private System.Windows.Forms.RadioButton radioButtonStartsWith;
     }
 }
 
