@@ -178,15 +178,16 @@ namespace ArraySort
 
         private int BinarySearch(string[] NameSortArray, string value, bool Exact, bool StartsWith, bool Partial)
         {
-            //binary search honestly confuses me and is giving me a lot of trouble..
-            //it's supposed to output the position of the selected Name.
+            //binary search method is for exact
+            //i kept the sequential search (for partial and startswith) in the same method for ease of access
+
 
             int first = 0;
             int last = NameSortArray.Length - 1;
             int middle;
             int position = -1;
             bool found = false;
-            
+
             if (Exact == true)
             {
                 while (!found && first <= last)
@@ -208,39 +209,58 @@ namespace ArraySort
                     }
 
                 }
-
+                return position;
 
             }
-            //currently doesnt work
-            if (Partial == true)
-            {
-                int i = 0;
-                
-                if (!(NameSortArray[i].Contains(value)))
-                {
-                    i++;
-                }
-                if (NameSortArray[i].Contains(value))
-                {
-                    position = i;
-                }
-            }
+
             if (StartsWith == true)
             {
                 int i = 0;
 
-                if (!(NameSortArray[i].StartsWith(value)))
+                while (i < last)
                 {
-                    i++;
+                    if (NameSortArray[i].StartsWith(value))
+                    {
+                        position = i;
+                        return position;
+
+                    }
+                    else
+                    {
+                        i++;
+                    }
                 }
-                if (NameSortArray[i].StartsWith(value))
+
+
+            position = -1;
+            return position;
+            }
+            if (Partial == true)
+            {
+                int i = 0;
+
+                while (i < last)
                 {
-                    position = i;
+                    if (NameSortArray[i].Contains(value))
+                    {
+                        position = i;
+
+                        break;
+                    }
+                    else
+                    {
+                        i++;
+                    }
                 }
+
+                return position;
+
+
             }
 
+            position = -1;
             return position;
-
+        
         }
 
         private void buttonSearch_Click_1(object sender, EventArgs e)
@@ -252,11 +272,22 @@ namespace ArraySort
 
                 //puts the input text into a variable
                 string SearchBox = textBoxSearch.Text;
-                //uses binarysearch to search the array for the input text
-                int Position = BinarySearch(NameSortArray, textBoxSearch.Text, Exact, StartsWith, Partial);
+                
                 //if the input text is found, it sets the boolean to true
                 bool SearchFound = NameSortArray.Contains(SearchBox);
-                
+
+                //uses binarysearch to search the array for the input text
+                int Position = BinarySearch(NameSortArray, textBoxSearch.Text, Exact, StartsWith, Partial);
+
+                if (Position >= 0)
+                {
+                    SearchFound = true;
+                }
+                else
+                {
+                    SearchFound = false;
+                }
+
                 //if the input text is not found, it notifies the user.
                 if (SearchFound == false)
                 {
@@ -272,7 +303,7 @@ namespace ArraySort
                     //subtracts the time from the beginning of the action to get an accurate timestamp
                     Double Time2 = (DateTime.Now - Time1).TotalSeconds;
                     labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
-                    MessageBox.Show("The name " + "'" + textBoxSearch.Text.ToString() + "'" + " has been found!");
+
                     //finds and highlights the correct listbox item corresponding to the name. 
                     listBoxNames.SetSelected(Position, true);
 
