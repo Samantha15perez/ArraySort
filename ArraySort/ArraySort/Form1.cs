@@ -35,8 +35,9 @@ namespace ArraySort
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //sets the search button as unusable until you sort the names. 
+            //sets the search box and button as unusable until you sort the names. 
             buttonSearch.Visible = false;
+            textBoxSearch.Visible = false;
 
             try
             {
@@ -61,10 +62,8 @@ namespace ArraySort
             
             try
             {
-                
 
-
-
+                //outputs the names to a seperate file.
                 StreamWriter OutputFile = new StreamWriter("SortedNames.CSV");
                 foreach (string name in listBoxNames.Items)
                 {
@@ -88,13 +87,9 @@ namespace ArraySort
             }
         }
 
-     
-
-     
-
         private void SelectionSort(string[] NameSortArray)
         {
-            //this is taken directly out of the book, but tweaked to handle strings instead of ints
+            //this is taken from the book, but tweaked to handle strings instead of ints
 
             int minIndex; //index of smallest value in scanned area
             string minValue; //smallest value in the scanned area
@@ -128,8 +123,7 @@ namespace ArraySort
 
         private void buttonSort_Click(object sender, EventArgs e)
         {
-            //once the names have been sorted, the search button becomes available.
-            buttonSearch.Visible = true;
+
             //grabs the current time
             DateTime Time1 = DateTime.Now;
             try
@@ -152,7 +146,9 @@ namespace ArraySort
                 //outputs time taken
                 labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
 
-
+                //once the names have been sorted, the search box and button become available.
+                buttonSearch.Visible = true;
+                textBoxSearch.Visible = true;
 
 
 
@@ -173,6 +169,7 @@ namespace ArraySort
         private int BinarySearch(string[] NameSortArray, string value)
         {
             //binary search honestly confuses me and is giving me a lot of trouble..
+            //it's supposed to output the position of the selected Name.
 
             int first = 0;
             int last = NameSortArray.Length - 1;
@@ -232,6 +229,7 @@ namespace ArraySort
                     Double Time2 = (DateTime.Now - Time1).TotalSeconds;
                     labelOutputTimer.Text = ("Time elapsed: " + Time2 + " Seconds.");
                     MessageBox.Show("The name " + "'" + textBoxSearch.Text.ToString() + "'" + " has been found!");
+                    listBoxNames.SetSelected(Position, true);
                      
                      
                 }

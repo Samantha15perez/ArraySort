@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.listBoxNames = new System.Windows.Forms.ListBox();
             this.labelOutputTimer = new System.Windows.Forms.Label();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonOutput = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonSort = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // listBoxNames
@@ -49,22 +47,23 @@
             // labelOutputTimer
             // 
             this.labelOutputTimer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelOutputTimer.Location = new System.Drawing.Point(215, 136);
+            this.labelOutputTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.labelOutputTimer.Location = new System.Drawing.Point(213, 136);
             this.labelOutputTimer.Name = "labelOutputTimer";
-            this.labelOutputTimer.Size = new System.Drawing.Size(132, 100);
+            this.labelOutputTimer.Size = new System.Drawing.Size(108, 100);
             this.labelOutputTimer.TabIndex = 1;
             this.labelOutputTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(215, 12);
+            this.textBoxSearch.Location = new System.Drawing.Point(199, 41);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(137, 20);
             this.textBoxSearch.TabIndex = 3;
             // 
             // buttonOutput
             // 
-            this.buttonOutput.Location = new System.Drawing.Point(250, 100);
+            this.buttonOutput.Location = new System.Drawing.Point(274, 12);
             this.buttonOutput.Name = "buttonOutput";
             this.buttonOutput.Size = new System.Drawing.Size(62, 23);
             this.buttonOutput.TabIndex = 4;
@@ -74,7 +73,7 @@
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(250, 42);
+            this.buttonSearch.Location = new System.Drawing.Point(236, 67);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(62, 23);
             this.buttonSearch.TabIndex = 5;
@@ -84,7 +83,7 @@
             // 
             // buttonSort
             // 
-            this.buttonSort.Location = new System.Drawing.Point(250, 71);
+            this.buttonSort.Location = new System.Drawing.Point(199, 12);
             this.buttonSort.Name = "buttonSort";
             this.buttonSort.Size = new System.Drawing.Size(62, 23);
             this.buttonSort.TabIndex = 6;
@@ -92,16 +91,11 @@
             this.buttonSort.UseVisualStyleBackColor = true;
             this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 252);
+            this.ClientSize = new System.Drawing.Size(345, 252);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.buttonOutput);
@@ -124,7 +118,6 @@
         private System.Windows.Forms.Button buttonOutput;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Button buttonSort;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 
